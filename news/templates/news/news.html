@@ -1,0 +1,118 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %}
+  Rossvik - Новости
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <main class="main">
+      <div class="container">
+        {% if lang == 'ru' %}
+          <div class="title">Новости</div>
+        {% elif lang == 'uz' %}
+          <div class="title">Yangiliklar</div>
+        {% endif %}
+        <div class="main-wrapper">
+          <div class="news">
+            {% for new, comment_count in news_with_comments_count.items %}
+            <div class="news-card">
+              <div class="news-card__img">
+                {% if new.image %}
+                  {% if lang == 'ru' %}
+                    <a href="{{ new.get_url }}">
+                      <img src="{{ new.image.url }}" alt="">
+                    </a>
+                  {% elif lang == 'uz' %}
+                    <a href="{{ new.get_url_uz }}">
+                      <img src="{{ new.image.url }}" alt="">
+                    </a>
+                  {% endif %}
+                {% endif %}
+              </div>
+              {% if lang == 'ru' %}
+                <div class="news-card__category">новости</div>
+              {% elif lang == 'uz' %}
+                <div class="news-card__category">Yangiliklar</div>
+              {% endif %}
+              <div class="news-card__title">
+                {% if lang == 'ru' %}
+                <a href="{{ new.get_url }}">
+                  {{ new.title }}
+                </a>
+                {% elif lang == 'uz' %}
+                <a href="{{ new.get_url_uz }}">
+                  {{ new.title }}
+                </a>
+                {% endif %}
+              </div>
+              <div class="news-card__info">
+                <span class="news-card__date"> {{ new.timestamp }} </span> | <span class="news-card__author"> By {{ new.author_name }} </span>
+              </div>
+              <div class="news-card__description">
+                {{ new.description }}
+              </div>
+              <div class="news-card__action">
+                <div class="news-card__read">
+                  {% if lang == 'ru' %}
+                    <a href="{{ new.get_url }}">читать</a>
+                  {% elif lang == 'uz' %}
+                    <a href="{{ new.get_url_uz }}">O‘qish</a>
+                  {% endif %}
+                </div>
+                {% if lang == 'ru' %}
+                  {% if comment_count == 0 %}
+                    <div class="news-card__comments">Нет комментариев</div>
+                  {% elif comment_count %}
+                    <div class="news-card__comments">Коментариев: {{comment_count}}</div>
+                  {% endif %}
+                {% elif lang == 'uz' %}
+                  {% if comment_count == 0 %}
+                    <div class="news-card__comments">Izohlarsiz</div>
+                  {% elif comment_count %}
+                    <div class="news-card__comments">Izohlar: {{comment_count}}</div>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <center>
+            <div class="pagination">
+              <span class="step-links">
+                {% if news.has_previous %}
+                  <a class="first_page" href="?page=1"><<</a>
+                  <a class="back_page" href="?page={{ news.previous_page_number }}"><</a>
+                {% endif %}
+                  <a href="" class="current">{{ news.number }}</a>
+                {% if news.has_next %}
+                  <a class="next_page" href="?page={{ news.next_page_number }}">></a>
+                  <a class="last_page" href="?page={{ news.paginator.num_pages }}">>></a>
+                {% endif %}
+              </span>
+            </div>
+          </center>
+          <aside class="aside">
+            <div class="aside-content">
+              <div class="aside-news">
+                {% if lang == 'ru' %}
+                  <h3 class="aside-title">свежие новости</h3>
+                {% elif lang == 'uz' %}
+                  <h3 class="aside-title">Yangiliklar</h3>
+                {% endif %}
+                <ul class="aside-list">
+                  {% for new in new_news reversed %}
+                    <li class="aside-list__item">
+                      <a href="{{ new.get_url }}" class="aside-list__link">{{ new.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+    {% include 'news/footer.html' %}
+  </div>
+  <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'contacts/base.html' %}
+{% load static %}
+{% block title %}
+  Rossvik - Контакты
+{% endblock %}
+{% block body %}
+    <main class="main">
+      <div class="container">
+        {% if lang == 'ru' %}
+          <h1 class="title">Контакты</h1>
+        {% elif lang == 'uz' %}
+          <h1 class="title">Kontaktlar</h1>
+        {% endif %}
+        <div class="contacts">
+          <div class="contacts-text">
+            {% if lang == 'ru' %}
+              <div class="contacts-info">
+                <div class="contacts-info__block">
+                  <div class="contacts-info__subtitle"> Адрес: </div>
+                  <div class="contacts-info__text">Сергели авторынок блок 6/4 маг №10</div>
+                </div>
+                <div class="contacts-info__block">
+                  <div class="contacts-info__block">
+                    <div class="contacts-info__subtitle"> Контактные номера: </div>
+                    <div class="contacts-info__text"><a href="tel:+998973446409">+998 97 344-64-09</a></div>
+                  </div>
+                </div>
+                <div class="contacts-info__block">
+                  <div class="contacts-info__subtitle"> E-mail: </div>
+                  <div class="contacts-info__text"><a href="mailto:zahidz2005@mail.ru">zahidz2005@mail.ru</a></div>
+                </div>
+                <div class="contacts-info__block">
+                  <div class="contacts-info__subtitle"> Контактные номера: </div>
+                  <div class="contacts-info__text"><a href="tel:+998909746940">+998 90 974-69-40</a></div>
+                </div>
+              </div>
+            {% elif lang == 'uz' %}
+              <div class="contacts-info">
+                <div class="contacts-info__block">
+                  <div class="contacts-info__subtitle"> Manzil: </div>
+                  <div class="contacts-info__text">Sergeli avtomobil bozori blok 6/4 do'kon 10</div>
+                </div>
+                <div class="contacts-info__block">
+                  <div class="contacts-info__block">
+                    <div class="contacts-info__subtitle"> Aloqa raqamlari: </div>
+                    <div class="contacts-info__text"><a href="tel:+998973446409">+998 97 344-64-09</a></div>
+                  </div>
+                </div>
+                <div class="contacts-info__block">
+                  <div class="contacts-info__subtitle"> E-mail: </div>
+                  <div class="contacts-info__text"><a href="mailto:zahidz2005@mail.ru">zahidz2005@mail.ru</a></div>
+                </div>
+                <div class="contacts-info__block">
+                  <div class="contacts-info__subtitle"> Aloqa raqamlari: </div>
+                  <div class="contacts-info__text"><a href="tel:+998909746940">+998 90 974-69-40</a></div>
+                </div>
+              </div>
+            {% endif %}
+            <div class="contacts-map">
+              <script type="text/javascript" charset="utf-8" async
+                src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A10a8de284c3d6cff65d283d2a74cc5f58bef21dc8d719a3203733ef193725c58&amp;width=100%25&amp;height=450&amp;lang=ru_RU&amp;scroll=false">
+              </script>
+            </div>
+          </div>
+          <div class="contacts-form">
+            {% if lang == 'ru' %}
+              <form class="card-form" method="GET"> {% csrf_token %}
+                <input type="text" placeholder="Ф.И.О (Обязательно)" name="name">
+                <input type="email" placeholder="E-mail (Обязательно)" name="email">
+                <input type="text" placeholder="Тема" name="subject">
+                <textarea placeholder="Сообщение" name="message"></textarea>
+                <button type="submit">Отправить</button>
+              </form>
+            {% elif lang == 'uz' %}
+              <form class="card-form" method="GET"> {% csrf_token %}
+                <input type="text" placeholder="To‘liq ism (to'ldirish shart)" name="name">
+                <input type="email" placeholder="E-mail (to'ldirish shart)" name="email">
+                <input type="text" placeholder="Mavzu" name="subject">
+                <textarea placeholder="Sms xabar" name="message"></textarea>
+                <button type="submit">Yuborish</button>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'contacts/footer.html' %}
+  </div>
+{% endblock %}}

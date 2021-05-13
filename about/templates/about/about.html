@@ -1,0 +1,30 @@
+{% extends 'about/base.html' %}
+{% load static %}
+{% block title %}
+  Rossvik - О нас
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <main class="main">
+      <div class="container">
+        <h1 class="title">О Нас</h1>
+        <div class="about">
+          <div class="about-text">
+            <p>
+              <span> Rossvik </span> — одна из наиболее динамично развивающихся компаний в сфере шиноремонта. На
+              сегодняшний день ROSSVIK является крупнейшим производителем шиноремонтных материалов в СНГ. </p>
+            <p>Под торговой маркой ROSSVIK мы предлагаем нашим клиентам большой выбор ремонтных материалов собственного
+              производства, а также широкий ассортимент инструментов, шиномонтажного и автосервисного оборудования. </p>
+            <p>Наша дилерская сеть объединяет сотни распространителей по всему СНГ. Ежедневно нашей продукцией
+              пользуются тысячи шиноремонтных мастерских. </p>
+          </div>
+          <div class="about-certificate">
+            <img src="{% static 'img/about/certificate.jpg' %}" alt="">
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'about/footer.html' %}
+  </div>
+  <script src="{% static '/js/main.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,22 @@
+// footer
+@media screen and ( max-width: 820px )
+  .footer
+    &-inner
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 150px
+      grid-template-areas: "address info info info social"
+    &-number
+      grid-column-start: 1
+      grid-row-start: 2
+      padding: 10px 0
+    &-info
+      grid-column-start: 3
+      grid-column-end: 6
+      // grid-column-start: 6, 8
+    &-social
+      grid-column-start: 7
+      grid-column-end: 8
+    &-author
+      grid-column-start: 6
+      grid-column-end: 8
+      text-align: right
+      grid-row-start: 2

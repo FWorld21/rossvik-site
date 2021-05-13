@@ -1,0 +1,46 @@
+.aside
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  grid-area: aside
+  &-search
+    border: 2px solid #337767
+    padding: 15px
+    border-radius: 6px
+    outline: none
+    font-family: 'Montserrat'
+    font-size: 1.6rem
+    width: 100%
+    margin-bottom: 25px
+  &-content
+    border: 2px solid #D0D0D0
+    border-radius: 6px
+    padding: 30px 20px 30px 30px
+    width: 100%
+  &-title
+    font-weight: 700
+    font-size: 18px
+    text-transform: uppercase
+    margin: 25px 0
+    &:first-child
+      margin-top: 0
+  &-list
+    position: relative
+    &__item
+      text-indent: 15px
+      margin-bottom: 20px
+      &::before
+        content: ""
+        display: inline-block
+        width: 5px
+        height: 5px
+        transform: translateY(100%)
+        position: absolute
+        left: 0
+        border-radius: 50%
+        background-color: #337767
+    &__link
+      text-decoration: none
+      color: #000
+      &:hover
+        text-decoration: underline

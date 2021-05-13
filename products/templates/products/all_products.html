@@ -1,0 +1,110 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block head %}
+  <script src="{% static 'js/swiper-bundle.min.js' %}" defer></script>
+  <script src="{% static 'js/main.js' %}" defer></script>
+{% endblock %}
+{% block title %}
+  Rossvik - Главная
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <main class="main">
+      <div class="category">
+        <div class="category-container">
+          <div class="category-cover">
+            {% for category in categories_0 %}
+              <div class="category-wrapper">
+                <div class="category-item" data-category-top>
+                  <div class="category-icon">
+                    <img src="{{ category.image.url }}" alt="" />
+                  </div>
+                  <div class="category-title">{{ category.name }}</div>
+                </div>
+                <div class="subcategory subcategory-top">
+                  <img   src="{% static 'img/icons/close.svg' %}"
+                       alt=""
+                       class="subcategory-close"
+                  />
+                  <div class="subcategory-scroll">
+                    {% for subcategory in subcategories %}
+                    {% if subcategory.category.name == category.name %}
+                    <div class="subcategory-item">
+                      {% if lang == 'ru' %}
+                        <a href="{{ subcategory.get_url }}">
+                          <div class="subcategory-icon">
+                            <img src="{{ subcategory.image.url }}" alt="" />
+                          </div>
+                          <div class="subcategory-title">
+                            {{ subcategory.name }}
+                          </div>
+                        </a>
+                      {% elif lang == 'uz' %}
+                        <a href="{{ subcategory.get_url_uz }}">
+                          <div class="subcategory-icon">
+                            <img src="{{ subcategory.image.url }}" alt="" />
+                          </div>
+                          <div class="subcategory-title">
+                            {{ subcategory.name }}
+                          </div>
+                        </a>
+                      {% endif %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="category-cover">
+            {% for category in categories_1 %}
+              <div class="category-wrapper">
+                <div class="category-item" data-category-bottom>
+                  <div class="category-icon">
+                    <img src="{{ category.image.url }}" alt="" />
+                  </div>
+                  <div class="category-title">{{ category.name }}</div>
+                </div>
+                <div class="subcategory subcategory-bottom">
+                  <img src="{% static 'img/icons/close.svg' %}"
+                       alt=""
+                       class="subcategory-close"
+                  />
+                  <div class="subcategory-scroll">
+                    {% for subcategory in subcategories %}
+                    {% if subcategory.category.name == category.name %}
+                      <div class="subcategory-item">
+                        {% if lang == 'ru' %}
+                          <a href="{{ subcategory.get_url }}">
+                            <div class="subcategory-icon">
+                              <img src="{{ subcategory.image.url }}" alt="" />
+                            </div>
+                            <div class="subcategory-title">
+                              {{ subcategory.name }}
+                            </div>
+                          </a>
+                        {% elif lang == 'uz' %}
+                          <a href="{{ subcategory.get_url_uz }}">
+                            <div class="subcategory-icon">
+                              <img src="{{ subcategory.image.url }}" alt="" />
+                            </div>
+                            <div class="subcategory-title">
+                              {{ subcategory.name }}
+                            </div>
+                          </a>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'products/footer.html' %}
+  </div>
+{% endblock %}}

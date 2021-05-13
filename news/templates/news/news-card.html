@@ -1,0 +1,95 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %}
+  Новости
+{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <main class="main">
+      <div class="card card-container">
+        {% if news.image %}
+          <div class="card-img">
+            <img src="{{ news.image.url }}" alt="">
+          </div>
+        {% endif %}
+        {% if lang == 'ru' %}
+          <div class="news-card__category card-category"> новости </div>
+        {% elif lang == 'uz' %}
+          <div class="news-card__category card-category"> yangiliklar </div>
+        {% endif %}
+        <div class="news-card__title card-title">{{ news.title }}</div>
+        <div class="news-card__info card-info">
+          <span class="news-card__date"> {{ news.timestamp }} </span> | <span class="news-card__author"> {{ news.author_name }} </span>
+        </div>
+        <div class="card-pics">
+          {% for image in images %}
+            {% if image.news.slug == news.slug %}
+              <div class="card-pics__item">
+                <a data-fancybox="gallery" href="{{ image.image.url }}">
+                  <img src="{{ image.image.url }}" alt="">
+                </a>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if messages %}
+          {% for message in messages %}
+            <div class="success">
+              <div class="success-icon">
+                <img src="{% static 'img/icons/tick.svg' %}" alt="Tick">
+              </div>
+              <div class="success-info">
+                <p> {{ message }} </p>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <form class="card-form" method="GET"> {% csrf_token %}
+          {% if lang == 'ru' %}
+            <div class="card-form__title"> Оставить комментарии </div>
+            <div class="card-form__info">*Ваш адрес эл.почты не будет опубликован.</div>
+            <textarea name="message" placeholder="Сообщение" required></textarea>
+            <div class="card-form__inputs">
+              <input name="fname" type="text" placeholder="Имя" required>
+              <input name="email" type="email" placeholder="E-mail" required>
+              <input name="site" type="text" placeholder="Веб-сайт">
+            </div>
+            <button type="submit">Отправить</button>
+          {% elif lang == 'uz' %}
+            <div class="card-form__title"> Sharh qoldiring </div>
+            <div class="card-form__info">*Sizning E-mail nashr qilinmaydi.</div>
+            <textarea name="message" placeholder="Sms xabar" required></textarea>
+            <div class="card-form__inputs">
+              <input name="fname" type="text" placeholder="To'liq ism" required>
+              <input name="email" type="email" placeholder="E-mail" required>
+              <input name="site" type="text" placeholder="Sayt">
+            </div>
+            <button type="submit">Отправить</button>
+          {% endif %}
+        </form>
+        {% for i in comments %}
+          <div class="card-review">
+            <div class="card-review__avatar">
+              <img src="{% static 'img/icons/avatar.svg' %}" alt="User avatar">
+            </div>
+            <div class="card-review__name">
+              <p> {{ i.author_name }} </p>
+            </div>
+            <div class="card-review__text">
+              <p> {{ i.comment }} </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </main>
+    {% include 'news/footer.html' %}
+  </div>
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}" defer></script>
+  <script src="{% static 'js/jquery.fancybox.min.js' %}" defer></script>
+  <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

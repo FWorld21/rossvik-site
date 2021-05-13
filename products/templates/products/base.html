@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="icon" href="{% static 'img/icons/favicon.svg' %}" type="image/x-icon">
+    {% block head %}
+    {% endblock %}
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header-inner">
+          <div class="header-logo">
+            <a href="{% url 'products_ru' %}">
+              <img src="{% static 'img/header/logo.svg' %}" alt="">
+            </a>
+          </div>
+          <nav class="header-nav">
+            {% if lang == 'ru' %}
+              <ul class="header-nav__list">
+                <li class="header-nav__item">
+                  <a href="{% url 'products_ru' %}" class="header-nav__link">Главная</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'gallery_ru' %}" class="header-nav__link">Галерея</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'news_ru' %}" class="header-nav__link">Новости</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'study_ru' %}" class="header-nav__link">Обучение</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'about_ru' %}" class="header-nav__link">О нас</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'contacts_ru' %}" class="header-nav__link">Контакты</a>
+                </li>
+              </ul>
+            {% elif lang == 'uz' %}
+              <ul class="header-nav__list">
+                <li class="header-nav__item">
+                  <a href="{% url 'products_uz' %}" class="header-nav__link">Bosh sahifa</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'gallery_uz' %}" class="header-nav__link">Galereya</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'news_uz' %}" class="header-nav__link">Yangiliklar</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'study_uz' %}" class="header-nav__link">Ta‘lim</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'about_uz' %}" class="header-nav__link">Biz haqimizda</a>
+                </li>
+                <li class="header-nav__item">
+                  <a href="{% url 'contacts_uz' %}" class="header-nav__link">Kontaktlar</a>
+                </li>
+              </ul>
+            {% endif %}
+          </nav>
+          <div class="header-lang">
+            {% if lang == 'ru' %}
+              <a href="{% url 'products_ru' %}" class="active">ru</a>
+              <a href="{% url 'products_uz' %}" class="">uz</a>
+            {% elif lang == 'uz' %}
+              <a href="{% url 'products_ru' %}" class="">ru</a>
+              <a href="{% url 'products_uz' %}" class="active">uz</a>
+            {% endif %}
+          </div>
+          <form class="header-form" method="GET"> {% csrf_token %}
+            {% if lang == 'ru' %}
+              <input type="text" name="search-ru" class="header-form__search" placeholder="Поиск...">
+            {% elif lang == 'uz' %}
+              <input type="text" name="search-uz" class="header-form__search" placeholder="Izlash...">
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </header>
+    {% block body %}
+    {% endblock %}
+  </body>
+</html>

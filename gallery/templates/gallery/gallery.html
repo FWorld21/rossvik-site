@@ -1,0 +1,87 @@
+{% extends 'gallery/base.html' %}
+{% load static %}
+{% block title %}
+  Rossvik - Галерея
+{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <main class="main">
+      <div class="container">
+        {% if lang == 'ru' %}
+          <h1 class="title">Наша галерея</h1>
+        {% elif lang == 'uz' %}
+          <h1 class="title">Bizning galereyamiz</h1>
+        {% endif %}
+        <div class="main-wrapper">
+          <div class="gallery">
+            {% for post in posts  %}
+            <div class="gallery-subtitle">{{ post.name }}</div>
+            <div class="gallery-pics">
+                {% for image in images %}
+                  {% if image.post.name == post.name %}
+                    <div class="gallery-pic">
+                      <a data-fancybox="gallery" href="{{ image.image.url }}">
+                        <img src="{{ image.image.url }}" alt="" class="gallery-pic__item">
+                      </a>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+            </div>
+            {% endfor %}
+          </div>
+          <style>
+            .first_page, .back_page, .current, .next_page, .last_page {
+              color: white;
+              font-size: 18px;
+              font-weight: bold;
+              background: #337767;
+              padding: 10px 20px 10px 20px;
+              text-decoration: none;
+              border-radius: 5px;
+            }
+          </style>
+          <center>
+            <div class="pagination">
+              <span class="step-links">
+                {% if posts.has_previous %}
+                  <a class="first_page" href="?page=1"><<</a>
+                  <a class="back_page" href="?page={{ posts.previous_page_number }}"><</a>
+                {% endif %}
+                  <a href="" class="current">{{ posts.number }}</a>
+                {% if posts.has_next %}
+                  <a class="next_page" href="?page={{ posts.next_page_number }}">></a>
+                  <a class="last_page" href="?page={{ posts.paginator.num_pages }}">>></a>
+                {% endif %}
+              </span>
+            </div>
+          </center>
+          <aside class="aside">
+            <div class="aside-content">
+              <div class="aside-news">
+                {% if lang == 'ru' %}
+                  <h3 class="aside-title">свежие новости</h3>
+                {% elif lang == 'uz' %}
+                  <h3 class="aside-title">Yangiliklar</h3>
+                {% endif %}
+                <ul class="aside-list">
+                  {% for new in new_news reversed %}
+                    <li class="aside-list__item">
+                      <a href="{{ new.get_url }}" class="aside-list__link">{{ new.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+    {% include 'gallery/footer.html' %}
+  </div>
+  <script src="{% static 'js/jquery-3.6.0.min.js' %}" defer></script>
+  <script src="{% static 'js/jquery.fancybox.min.js' %}" defer></script>
+  <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends 'rossvik/base.html' %}
+{% load static %}
+{% block title %}
+  Rossvik - Поиск
+{% endblock %}
+{% block body %}
+      <main class="main">
+        <div class="container">
+          <div class="search">
+            {% if products|length == 0 %}
+              {% if lang == 'ru' %}
+                <div class="title title-search">
+                  В разделе "Товары" ничего не найдено!
+                </div>
+              {% elif lang == 'uz' %}
+                <div class="title title-search">
+                  "Tovarlar" bo'limida ma'lumot topilmadi!
+                </div>
+              {% endif %}
+            {% else %}
+              {% if lang == 'ru' %}
+                <div class="title title-search">
+                  В разделе "Товары" найдено:
+                  <span> {{ search_word }} </span>
+                </div>
+              {% elif lang == 'uz' %}
+                <div class="title title-search">
+                  "Tovarlar" bo'limida topilgan ma'lumotlar:
+                  <span> {{ search_word }} </span>
+                </div>
+              {% endif %}
+              <div class="items">
+                {% for product in products %}
+                  {% if lang == 'ru' %}
+                    <div class="items-card">
+                      <div class="items-border">
+                        <a href="{{ product.get_url }}">
+                          <img src="{{ product.image.url }}" alt="" />
+                        </a>
+                      </div>
+                      <div class="items-title">
+                        <a href="{{ product.get_url }}"> {{ product.name }} </a>
+                      </div>
+                      <div class="items-price">
+                        <span class="items-price__number"> {{ product.price }} </span>
+                        <span class="items-price__text">UZS</span>
+                      </div>
+                    </div>
+                  {% elif lang == 'uz' %}
+                      <div class="items-card">
+                        <div class="items-border">
+                          <a href="{{ product.get_url_uz}}">
+                            <img src="{{ product.image.url }}" alt="" />
+                          </a>
+                        </div>
+                        <div class="items-title">
+                          <a href="{{ product.get_url_uz }}"> {{ product.name }} </a>
+                        </div>
+                        <div class="items-price">
+                          <span class="items-price__number"> {{ product.price }} </span>
+                          <span class="items-price__text">UZS</span>
+                        </div>
+                      </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if study|length == 0 %}
+              {% if lang == 'ru' %}
+                <div class="title title-search">
+                  В разделе "Обучение" ничего не найдено!
+                </div>
+              {% elif lang == 'uz' %}
+                <div class="title title-search">
+                  "Ta'lim" bo'limida ma'lumot topilmadi!
+                </div>
+              {% endif %}
+            {% else %}
+              {% if lang == 'ru' %}
+                <div class="title title-search">
+                  В разделе "Обучение" найдено :<span> {{ search_word }} </span>
+                </div>
+              {% elif lang == 'uz' %}
+                  <div class="title title-search">
+                    "Ta‘lim" bo'limida topilgan ma'lumotlar:<span> {{ search_word }} </span>
+                  </div>
+              {% endif %}
+              {% for stud in study %}
+                <div class="study-card search-result">
+                  <div class="study-card__img">
+                    <a href="{{ stud.get_url }}">
+                      <img src="{{ stud.image.url }}" alt="" />
+                    </a>
+                  </div>
+                  {% if lang == 'ru' %}
+                    <div class="study-card__category">обучение</div>
+                  {% elif lang == 'uz' %}
+                    <div class="study-card__category">ta'lim</div>
+                  {% endif %}
+                  <div class="study-card__title">
+                    <a href="{{ stud.get_url }}">{{ stud.title }}</a>
+                  </div>
+                  <div class="study-card__info">
+                    <span class="study-card__date"> {{ stud.timestamp }} </span> | <span class="study-card__author"> By {{ stud.author_name }} </span>
+                  </div>
+                  <div class="study-card__action">
+                    {% if lang == 'ru' %}
+                      <div class="study-card__read">
+                        <a href="{{ stud.get_url }}">читать</a>
+                      </div>
+                    {% elif lang == 'uz' %}
+                      <div class="study-card__read">
+                        <a href="{{ stud.get_url }}">o'qish</a>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            {% if news|length == 0 %}
+              {% if lang == 'ru' %}
+                <div class="title title-search">
+                  В разделе "Новости" ничего не найдено!
+                </div>
+              {% elif lang == 'uz' %}
+                <div class="title title-search">
+                  "Yangiliklar" bo'limida ma'lumot topilmadi!
+                </div>
+              {% endif %}
+            {% else %}
+              {% if lang == 'ru' %}
+                <div class="title title-search">
+                  В разделе "Новости" найдено :<span> {{ search_word }} </span>
+                </div>
+                {% elif lang == 'uz' %}
+                <div class="title title-search">
+                  "Yangiliklar" bo'limida topilgan ma'lumotlar:<span> {{ search_word }} </span>
+                </div>
+              {% endif %}
+              {% for new in news %}
+                <div class="news-card search-result">
+                  <div class="news-card__img">
+                    {% if new.image %}
+                      <a href="{{ new.get_url }}">
+                        <img src="{{ new.image.url }}" alt="">
+                      </a>
+                    {% endif %}
+                  </div>
+                  {% if lang == 'ru' %}
+                    <div class="news-card__category">новости</div>
+                  {% elif lang == 'uz' %}
+                    <div class="news-card__category">yangiliklar</div>
+                  {% endif %}
+                  <div class="news-card__title">
+                    <a href="{{ new.get_url}}"> {{ new.title }} </a>
+                  </div>
+                  <div class="news-card__info">
+                    <span class="news-card__date"> {{ new.timestamp }} </span> | <span class="news-card__author"> By {{ new.author_name }} </span>
+                  </div>
+                  <div class="news-card__description">
+                    {{ new.description }}
+                  </div>
+                  <div class="news-card__action">
+                    <div class="news-card__read">
+                      <div class="news-card__read">
+                        {% if lang == 'ru' %}
+                          <a href="{{ new.get_url }}">читать</a>
+                        {% elif lang == 'uz' %}
+                          <a href="{{ new.get_url }}">o'qish</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+
+
+          </div>
+        </div>
+      </main>
+    {% include 'news/footer.html' %}
+  <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

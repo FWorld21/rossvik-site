@@ -1,0 +1,114 @@
+{% extends 'study/base.html' %}
+{% load static %}
+{% block title %}
+  Товары
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <main class="main">
+      <div class="container">
+        {% if lang == 'ru' %}
+        <div class="title">Обучение</div>
+        {% elif lang == 'uz' %}
+          <div class="title">Ta'lim</div>
+        {% endif %}
+        <div class="main-wrapper">
+          <div class="study">
+            {% for stud, comment_count in study_with_comments_count.items %}
+              <div class="study-card">
+                <div class="study-card__img">
+                  {% if stud.image %}
+                    {% if lang == 'ru' %}
+                      <a href="{{ stud.get_url }}">
+                        <img src="{{ stud.image.url }}" alt="">
+                      </a>
+                    {% elif lang == 'uz' %}
+                      <a href="{{ stud.get_url_uz }}">
+                        <img src="{{ stud.image.url }}" alt="">
+                      </a>
+                    {% endif %}
+                  {% endif %}
+                </div>
+                {% if lang == 'ru' %}
+                  <div class="news-card__category">обучение</div>
+                {% elif lang == 'uz' %}
+                  <div class="news-card__category">ta'lim</div>
+                {% endif %}
+                {% if lang == 'ru' %}
+                  <div class="study-card__title">
+                    <a href="{{ stud.get_url}}"> {{ stud.title }} </a>
+                  </div>
+                {% elif lang == 'uz' %}
+                  <div class="study-card__title">
+                    <a href="{{ stud.get_url_uz}}"> {{ stud.title }} </a>
+                  </div>
+                {% endif %}
+                <div class="study-card__info">
+                  <span class="study-card__date"> {{ stud.timestamp }} </span> | <span class="study-card__author"> By {{ stud.author_name }} </span>
+                </div>
+                <div class="study-card__action">
+                  <div class="study-card__read">
+                    {% if lang == 'ru' %}
+                      <a href="{{ stud.get_url }}">читать</a>
+                    {% elif lang == 'uz' %}
+                      <a href="{{ stud.get_url_uz }}">O‘qish</a>
+                    {% endif %}
+                  </div>
+                  {% if lang == 'ru' %}
+                    {% if comment_count == 0 %}
+                      <div class="news-card__comments">Нет комментариев</div>
+                    {% elif comment_count %}
+                      <div class="news-card__comments">Коментариев: {{comment_count}}</div>
+                    {% endif %}
+                  {% elif lang == 'uz' %}
+                    {% if comment_count == 0 %}
+                      <div class="news-card__comments">Izohlarsiz</div>
+                    {% elif comment_count %}
+                      <div class="news-card__comments">Izohlar: {{comment_count}}</div>
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <center>
+            <div class="pagination">
+              <span class="step-links">
+                {% if studies.has_previous %}
+                  <a class="first_page" href="?page=1"><<</a>
+                  <a class="back_page" href="?page={{ studies.previous_page_number }}"><</a>
+                {% endif %}
+                  <a href="" class="current">{{ studies.number }}</a>
+                {% if studies.has_next %}
+                  <a class="next_page" href="?page={{ studies.next_page_number }}">></a>
+                  <a class="last_page" href="?page={{ studies.paginator.num_pages }}">>></a>
+                  <a class="last_page" href="?page={{ studies.paginator.num_pages }}">>></a>
+                {% endif %}
+              </span>
+            </div>
+          </center>
+          <aside class="aside">
+            <div class="aside-content">
+              <div class="aside-news">
+                {% if lang == 'ru' %}
+                  <h3 class="aside-title">свежие новости</h3>
+                {% elif lang == 'uz' %}
+                  <h3 class="aside-title">Yangiliklar</h3>
+                {% endif %}
+                <ul class="aside-list">
+                  {% for new in new_news reversed %}
+                    <li class="aside-list__item">
+                      <a href="{{ new.get_url }}" class="aside-list__link">{{ new.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+    {% include 'study/footer.html' %}
+  </div>
+  <script src="{% static '/js/main.js' %}"></script>
+{% endblock %}

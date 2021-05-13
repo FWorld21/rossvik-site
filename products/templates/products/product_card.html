@@ -1,0 +1,49 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block title %}
+  Товары
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <main class="main">
+      <div class="container">
+        <div class="product">
+          <div class="product-img">
+            <img src="{{ selected_product.image.url }}" alt="">
+          </div>
+          <div class="product-text">
+            <div class="product-title"> {{ selected_product }} </div>
+            <div class="product-price">
+              <span>{{ selected_product.price }}</span> UZS </div>
+            <div class="product-description">
+              <p class="product-description__text"> {{ selected_product.description }} </p>
+            </div>
+            <div class="product-vendor"> <span> {{ selected_product.article }}</span></div>
+            <div class="product-category">
+              <p>Категория:</p>
+              <a href="{{ subcategory.get_url }}">{{ subcategory }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="similar">
+          <div class="similar-title"> Похожие товары </div>
+          <div class="similar-items">
+            {% for product in similar %}
+              <div class="similar-products">
+                <div class="similar-products__img">
+                  <img src="{{ product.image.url }}" alt="">
+                </div>
+                <div class="similar-products__subtitle"> {{ product.name }} </div>
+                <div class="similar-products__price">
+                  <span> {{ product.price }}</span>
+                  <span>UZS</span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'products/footer.html' %}
+  </div>
+{% endblock %}

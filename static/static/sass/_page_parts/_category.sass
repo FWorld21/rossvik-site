@@ -1,0 +1,84 @@
+.category
+  padding: 100px 0
+  &-container
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-gap: 50px
+    max-width: 1070px
+  &-wrapper
+    position: relative
+  &-item
+    position: relative
+    text-align: center
+    width: 190px
+    margin: 0 auto
+    height: 230px
+    padding-top: 10px
+    border-radius: 10px
+    &:hover
+      cursor: pointer
+      .category-icon
+        background-color: lighten(#337767, 15%)
+  &-icon
+    display: flex
+    align-items: center
+    justify-content: center
+    background-color: $primaryColor
+    border-radius: 10px
+    width: 100%
+    margin: 0 auto
+    max-width: 130px
+    height: 130px
+    box-shadow: 0px 33px 24px -4px rgba(0, 0, 0, 0.1)
+    transition: all .3s ease
+    img
+      width: 82px
+      height: 82px
+      object-fit: scale-down
+  &-title
+    margin-top: 40px
+
+.subcategory
+  position: fixed
+  width: 1070px
+  height: 280px
+  background-color: $white
+  box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.08)
+  border-radius: 10px
+  padding: 50px 20px 50px 50px
+  transition: all .3s ease
+  z-index: 1
+  opacity: 0
+  visibility: hidden
+  &.show
+    opacity: 1
+    visibility: visible
+  &-scroll
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-gap: 60px
+    overflow-y: auto
+    height: 100%
+    padding-top: 30px
+  &-item
+    display: flex
+    margin: 0 auto
+    align-items: center
+    flex-direction: column
+    max-width: 200px
+    width: 100%
+    border-radius: 10px
+    text-align: center
+    &:hover
+      cursor: pointer
+  &-icon
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 80px
+    height: 80px
+    margin: 0 auto
+    border-radius: 10px
+    background-color: $darkWhite
+  &-title
+    margin-top: 35px

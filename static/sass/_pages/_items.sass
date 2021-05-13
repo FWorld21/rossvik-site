@@ -1,0 +1,42 @@
+.price
+  width: 100%
+  max-width: 360px
+  padding: 16px
+  outline: none
+  border: 2px solid $primaryColor
+  border-radius: 6px
+
+.items
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  padding: 35px 0 60px
+  gap: 45px 35px
+  justify-items: center
+  &-card
+    width: 100%
+    max-width: 360px
+    text-align: center
+  &-border
+    border: 2px solid #D0D0D0
+    border-radius: 12px
+    overflow: hidden
+    margin-bottom: 20px
+    height: 360px
+    img
+      width: 360px
+      height: 360px
+      object-fit: cover
+  &-title
+    margin-bottom: 10px
+    a
+      text-decoration: none
+      color: #000
+      &:hover
+        text-decoration: underline
+  &-price
+    font-size: 1.4rem
+    font-weight: $bold
+    &__number
+      color: #000
+    &__text
+      color: #337767
