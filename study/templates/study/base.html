@@ -85,6 +85,91 @@
               <input type="text" name="search-uz" class="header-form__search" placeholder="Izlash...">
             {% endif %}
           </form>
+          {% if lang == 'ru' %}
+            <nav class="navigation">
+              <button class="hamburger-menu">
+                <div class="line line-1"></div>
+                <div class="line line-2"></div>
+                <div class="line line-3"></div>
+              </button>
+              <div class="bg-cover"></div>
+              <ul class="nav-list">
+                <div class="nav-list__container">
+                  <li class="nav-item">
+                    <a href="{% url 'products_ru' %}" class="nav-link">Главная</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'gallery_ru' %}" class="nav-link">Галерея</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'news_ru' %}" class="nav-link">Новости</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'study_ru' %}" class="nav-link">Обучения</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'about_ru' %}" class="nav-link">О нас</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'contacts_ru' %}" class="nav-link">Контакты</a>
+                  </li>
+                  {% if lang == 'ru' %}
+                    <div class="header-lang__burger">
+                      <a href="{% url 'study_ru' %}" class="active">ru</a>
+                      <a href="{% url 'study_uz' %}" class="">uz</a>
+                    </div>
+                  {% elif lang == 'uz' %}
+                    <div class="header-lang__burger">
+                      <a href="{% url 'study_ru' %}" class="">ru</a>
+                      <a href="{% url 'study_uz' %}" class="active">uz</a>
+                    </div>
+                  {% endif %}
+                </div>
+              </ul>
+            </nav>
+          {% elif lang == 'uz' %}
+            <nav class="navigation">
+              <button class="hamburger-menu">
+                <div class="line line-1"></div>
+                <div class="line line-2"></div>
+                <div class="line line-3"></div>
+              </button>
+              <div class="bg-cover"></div>
+              <ul class="nav-list">
+                <div class="nav-list__container">
+                  <li class="nav-item">
+                    <a href="{% url 'products_uz' %}" class="nav-link">Bosh sahifa</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'gallery_uz' %}" class="nav-link">Galereya</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'news_uz' %}" class="nav-link">Yangiliklar</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'study_uz' %}" class="nav-link">Ta‘lim</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'about_uz' %}" class="nav-link">Biz haqimizda</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'contacts_uz' %}" class="nav-link">Kontaktlar</a>
+                  </li>
+                  {% if lang == 'ru' %}
+                    <div class="header-lang__burger">
+                      <a href="{% url 'study_ru' %}" class="active">ru</a>
+                      <a href="{% url 'study_uz' %}" class="">uz</a>
+                    </div>
+                  {% elif lang == 'uz' %}
+                    <div class="header-lang__burger">
+                      <a href="{% url 'study_ru' %}" class="">ru</a>
+                      <a href="{% url 'study_uz' %}" class="active">uz</a>
+                    </div>
+                  {% endif %}
+                </div>
+              </ul>
+            </nav>
+          {% endif %}
         </div>
       </div>
     </header>

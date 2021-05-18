@@ -3,6 +3,7 @@
 {% block head %}
   <script src="{% static 'js/swiper-bundle.min.js' %}" defer></script>
   <script src="{% static 'js/main.js' %}" defer></script>
+  <script src="{% static 'js/swiper.js' %}" defer></script>
 {% endblock %}
 {% block title %}
   Rossvik - Главная
@@ -10,12 +11,66 @@
 {% block body %}
   <div class="page">
     <main class="main">
-      <div class="category">
-        <div class="category-container">
-          <div class="category-cover">
+      <div class="swiper-container">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <div class="banner">
+                <img src="{% static 'img/banners/banner1.png' %}" alt="" />
+              </div>
+              <div class="banner-info">
+                <div class="banner-info__title">Срочно нужен ремонт шин?</div>
+                <div class="banner-info__text">
+                  Товарищи! консультация с широким активом способствует подготовки и реализации форм развития. Задача организации, в особенности и
+                  место обучения кадров позволяет оценить модели развития.
+                </div>
+                <div class="banner-info__btn">
+                  <a href="/categories/oborudovanie_dlya_shinoremontnoy_mastersko/ru/">Прикупить оборудование </a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="banner">
+                <img src="{% static 'img/banners/banner1.png' %}" alt="" />
+              </div>
+              <div class="banner-info">
+                <div class="banner-info__title">Срочно нужен ремонт шин?</div>
+                <div class="banner-info__text">
+                  Товарищи! консультация с широким активом способствует подготовки и реализации форм развития. Задача организации, в особенности и
+                  место обучения кадров позволяет оценить модели развития.
+                </div>
+                <div class="banner-info__btn">
+                  <a href="/categories/oborudovanie_dlya_shinoremontnoy_mastersko/ru/">Прикупить оборудование </a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="banner">
+                <img src="{% static 'img/banners/banner1.png' %}" alt="" />
+              </div>
+              <div class="banner-info">
+                <div class="banner-info__title">Срочно нужен ремонт шин?</div>
+                <div class="banner-info__text">
+                  Товарищи! консультация с широким активом способствует подготовки и реализации форм развития. Задача организации, в особенности и
+                  место обучения кадров позволяет оценить модели развития.
+                </div>
+                <div class="banner-info__btn">
+                  <a href="/categories/oborudovanie_dlya_shinoremontnoy_mastersko/ru/">Прикупить оборудование </a>
+                </div>
+              </div>
+            </div>
+            ...
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="category">
+          <div class="category-container">
+            <div class="category-cover">
             {% for category in categories_0 %}
               <div class="category-wrapper">
-                <div class="category-item" data-category-top>
+                <div class="category-item" data-category>
                   <div class="category-icon">
                     <img src="{{ category.image.url }}" alt="" />
                   </div>
@@ -31,7 +86,7 @@
                     {% if subcategory.category.name == category.name %}
                     <div class="subcategory-item">
                       {% if lang == 'ru' %}
-                        <a href="{{ subcategory.get_url }}">
+                        <a class="subcategory-link" href="{{ subcategory.get_url }}">
                           <div class="subcategory-icon">
                             <img src="{{ subcategory.image.url }}" alt="" />
                           </div>
@@ -60,7 +115,7 @@
           <div class="category-cover">
             {% for category in categories_1 %}
               <div class="category-wrapper">
-                <div class="category-item" data-category-bottom>
+                <div class="category-item" data-category>
                   <div class="category-icon">
                     <img src="{{ category.image.url }}" alt="" />
                   </div>

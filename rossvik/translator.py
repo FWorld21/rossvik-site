@@ -36,7 +36,7 @@ ru_eng_dict = {
     'я': 'ya',
     ' ': '_'
 }
-symbols = ['/', ',', '!', '@', '#', '$', '%', '&', '*', '(', ')', '_', '-', '+', '=', '{', '}', '[', ']', '.', '«', '»', '—']
+symbols = ['°', 'ø', '″', ')', '\'', '\\', '"', '(', '/','×', '/', ',', '!', '@', '#', '$', '%', '&', '*', '(', ')', '_', '-', '+', '=', '{', '}', '[', ']', '.', '«', '»', '—']
 
 
 def translate(word):
@@ -46,6 +46,8 @@ def translate(word):
             translated += ru_eng_dict[letter.lower()]
         elif letter in symbols:
             translated += ''
+        elif letter == 'ø':
+            print("here")
         else:
             translated += letter.lower()
     return translated

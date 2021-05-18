@@ -1,5 +1,10 @@
 {% extends 'news/base.html' %}
 {% load static %}
+{% block head %}
+  <script src="{% static 'js/swiper-bundle.min.js' %}" defer></script>
+  <script src="{% static 'js/main.js' %}" defer></script>
+  <script src="{% static 'js/sidebar.js' %}" defer></script>
+{% endblock %}
 {% block title %}
   Rossvik - Новости
 {% endblock %}
@@ -75,7 +80,6 @@
               </div>
             </div>
             {% endfor %}
-          </div>
           <center>
             <div class="pagination">
               <span class="step-links">
@@ -91,6 +95,7 @@
               </span>
             </div>
           </center>
+          </div>
           <aside class="aside">
             <div class="aside-content">
               <div class="aside-news">
@@ -114,5 +119,4 @@
     </main>
     {% include 'news/footer.html' %}
   </div>
-  <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

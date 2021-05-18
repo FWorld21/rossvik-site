@@ -1,5 +1,9 @@
 {% extends 'products/base.html' %}
 {% load static %}
+{% block head %}
+  <script src="{% static 'js/swiper-bundle.min.js' %}" defer></script>
+  <script src="{% static 'js/main.js' %}" defer></script>
+{% endblock %}
 {% block title %}
   Товары
 {% endblock %}
@@ -10,36 +14,57 @@
         <div class="title title-sm">{{ subcategory.name }}</div>
         <form method="GET" id="filterprice"> {% csrf_token %}
           <select name="price" class="price" form="filterprice">
-            <option value="low" onchange='if(this.value != 0) { this.form.submit(); }'>Цены: по убыванию</option>
-            <option value="high" onchange='if(this.value != 0) { this.form.submit(); }'>Цены: по возрастанию</option>
+            <option value="all">Все товары</option>
+            <option value="low">Цены: по убыванию</option>
+            <option value="high">Цены: по возрастанию</option>
           </select>
+          <button class="btn-accept" type="submit">Применить</button>
         </form>
         <div class="items">
           {% for product in products %}
-            {% if product.subcategory.name == subcategory.name %}
-              <div class="items-card">
-                <div class="items-border">
-                  {% if lang == 'ru' %}
-                    <a href="{{ product.get_url }}">
-                      <img src="{{ product.image.url}}" alt="">
-                    </a>
-                  {% elif lang == 'uz' %}
-                    <a href="{{ product.get_url_uz }}">
-                      <img src="{{ product.image.url}}" alt="">
-                    </a>
-                  {% endif %}
-                </div>
-                <div class="items-title">
-                  <a href="">{{ product.name }}</a>
-                </div>
-                <div class="items-price">
-                  <span class="items-price__number">{{ product.price }}</span>
-                  <span class="items-price__text">UZS</span>
-                </div>
+            <div class="items-card">
+              <div class="items-border">
+                {% if lang == 'ru' %}
+                <a href="{{ product.get_url }}">
+                  <img src="{{ product.image.url}}" alt="">
+                </a>
+                {% elif lang == 'uz' %}
+                <a href="{{ product.get_url_uz }}">
+                  <img src="{{ product.image.url}}" alt="">
+                </a>
+                {% endif %}
               </div>
-            {% endif %}
+              <div class="items-title">
+                {% if lang == 'ru' %}
+                <a href="{{ product.get_url }}">{{ product.name }}</a>
+                {% elif lang == 'uz' %}
+                <a href="{{ product.get_url_uz }}">{{ product.name }}</a>
+                {% endif %}
+              </div>
+              <div class="items-price">
+                <span class="items-price__number">{{ product.price }}</span>
+                <span class="items-price__text">UZS</span>
+              </div>
+            </div>
           {% endfor %}
         </div>
+        {% if priced != 'yes' %}
+          <center>
+          <div class="pagination">
+            <span class="step-links">
+                {% if products.has_previous %}
+                  <a class="first_page" href="?page=1"><<</a>
+                  <a class="back_page" href="?page={{ products.previous_page_number }}"><</a>
+                {% endif %}
+                  <a href="" class="current">{{ products.number }}</a>
+                {% if products.has_next %}
+                  <a class="next_page" href="?page={{ products.next_page_number }}">></a>
+                  <a class="last_page" href="?page={{ products.paginator.num_pages }}">>></a>
+                {% endif %}
+              </span>
+            </div>
+          </center>
+        {% endif %}
       </div>
     </main>
     {% include 'products/footer.html' %}

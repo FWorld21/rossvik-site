@@ -29,10 +29,10 @@ class CommentWork:
         print("Record inserted successfully into SqliteDb_developers table ", self.cursor.rowcount)
         self.cursor.close()
 
-
+#  ('products_subcategories',), ('products_product',)
 testobj = CommentWork()
 # print(testobj.show_all_tables())
-# print(testobj.show_table('study_comments'))
+# print(testobj.show_table('products_product'))
 # print(testobj.show_table('news_comments'))
-# print(testobj.show_columns('study_comments'))
+# print(testobj.show_columns('products_product'))
 # testobj.write_to_db()\

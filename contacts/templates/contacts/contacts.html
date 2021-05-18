@@ -1,5 +1,9 @@
 {% extends 'contacts/base.html' %}
 {% load static %}
+{% block head %}
+  <script src="{% static 'js/swiper-bundle.min.js' %}" defer></script>
+  <script src="{% static 'js/main.js' %}" defer></script>
+{% endblock %}
 {% block title %}
   Rossvik - Контакты
 {% endblock %}
